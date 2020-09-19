@@ -1,0 +1,9 @@
+body{
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 15px auto;
+}
+
+input{
+    margin-top: 25px;
+}
