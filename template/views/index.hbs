@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
+    <script src="js/script.js" defer></script>
     <title>Document</title>
 </head>
 <body>
+     <header>
     <h1>Covid Tracker</h1>
     {{> header}}
-    <div>
+         <div>
     {{desc}}
     </div>
     <form>
@@ -18,8 +21,10 @@
     </form>
     <p class="textMessageOne"></p>
     <p class="textMessageTwo"></p>
-
-    <script src="js/script.js"></script>
+    <div class="chart-container">
+        <canvas id="chart"></canvas>
+    </div>
+     </header>
 
 </body>
 </html>

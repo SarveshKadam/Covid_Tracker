@@ -23,15 +23,20 @@ app.get('/',(req,res)=>{
     })
 })
 
+
 app.get('/about',(req,res)=>{
     res.render('about')
 })
 
 app.get('/covid',(req,res)=>{
-    const locationCountry = req.query.country
+    let locationCountry = req.query.country
 
     tracker(locationCountry,(error,data)=>{
-           res.send({
+        if(error){
+            return res.send({error})
+        }
+        
+        res.send({
                error : error,
                data : data
            })
@@ -42,28 +47,3 @@ app.get('/covid',(req,res)=>{
 app.listen(port,()=>{
     console.log("App is listing at "+port);
 })
-
-
-
-
-
-// tracker("india",(error,data)=>{
-//     // res.send(error)
-//     // res.send(data)
-//  })
-
-// const country = process.argv[2]
-// if(country === undefined){
-//     console.log(chalk.red.inverse("Please enter a location"));
-// }else{
-// tracker(country,(error,data)=>{
-//    console.log('Error',error)
-//    console.log('Data',data)
-// })
-// }
-
-
-// tracker('south-africa',(error,data)=>{
-//     console.log('Error',error)
-//     console.log('Data',data)
-//  })
