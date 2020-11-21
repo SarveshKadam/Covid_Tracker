@@ -13,13 +13,13 @@ const partialsDirectory = path.join(__dirname,'../template/partials')
 app.set('views',viewsDirectory)
 
 app.use(express.static(publicDirectory))
-const port = 3000
+const port = process.env.PORT || 3000
 
 hbs.registerPartials(partialsDirectory,(error)=>{})
 
 app.get('/',(req,res)=>{
     res.render('index',{
-        desc:"This gives cases counts"
+        desc:"It provides the Case Count"
     })
 })
 
@@ -43,6 +43,11 @@ app.get('/covid',(req,res)=>{
         })
     
 })
+
+app.get('*',(req,res)=>{
+    res.send("<h1>Page Not Found</h1>")
+})
+
 
 app.listen(port,()=>{
     console.log("App is listing at "+port);
