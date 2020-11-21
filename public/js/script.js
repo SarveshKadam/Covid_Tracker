@@ -2,26 +2,28 @@
 const textMessageOne = document.querySelector('.textMessageOne')
 const textMessageTwo = document.querySelector('.textMessageTwo')
 const search = document.querySelector('input')
+const textRate = document.querySelector('.text-rate')
 
 document.querySelector('form').addEventListener('submit',(e)=>{
     e.preventDefault()
     const location = capitalize(search.value)
     const country = location.replace(/\s/g,'_') 
     textMessageOne.textContent = ""
+    textRate.textContent = ""
     fetch('/covid?country='+country).then((response)=>{
         response.json().then((data)=>{
             if(data.error){
                 console.log(data.error);
                 return textMessageOne.textContent = data.error
-                
             }
             const allData = data.data[country]
             console.log(data.data[country]);
             textMessageOne.textContent = `The total number of confirmed cases in ${location} are ${allData.confirmed}`
             const activeCount = allData.confirmed - (allData.deaths + allData.recovered)
+            const recoveryRate = ((allData.recovered / allData.confirmed)*100).toFixed(2)
             var ctx = document.getElementById('chart').getContext('2d');
             var pollchart = new Chart(ctx, {
-            type: 'doughnut',
+            type: 'pie',
             data: {
                 labels: ['Active', 'Confirmed', 'Death', 'Recovered'],
                 datasets: [{
@@ -42,8 +44,9 @@ document.querySelector('form').addEventListener('submit',(e)=>{
                     borderWidth: 1
                 }]
             }
-});
-
+        });
+        console.log(recoveryRate);
+        textRate.textContent = `${recoveryRate} %`
         })
     })
 })
