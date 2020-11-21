@@ -1,9 +1,21 @@
 body{
-    max-width: 740px;
     margin: 0 auto;
     padding: 15px auto;
+    overflow: hidden;
+    background-color: #eeeeee;
+    width: 740px;
+
 }
 
 input{
     margin-top: 25px;
+}
+
+.chart-container{
+    width: 35rem;
+    height: 50vh;
+}
+
+.rate{
+    border-left: 0.8px solid #000000;
 }
